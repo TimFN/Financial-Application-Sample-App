@@ -1,0 +1,55 @@
+﻿@using Financial_Planning_MVC.Areas.Identity.Pages.Account
+
+@model LoginModel
+
+<div class="login-page-container">
+    <div class="site-info-container slideInDown animated">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card text-center mb-3">
+                    <h4 class="card-header">Financial Sample Application</h4>
+                    <div class="card-body">
+                        <h5 class="card-title">This site was built using the following frameworks and services:</h5>
+                        <div class="list-group">
+                            <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-2.2" target="_blank" class="list-group-item list-group-item-action">.NET Core MVC</a>
+                            <a href="https://azure.microsoft.com/en-us/" target="_blank" class="list-group-item list-group-item-action">Azure Cloud Services</a>
+                            <a href="https://vuejs.org/" target="_blank" class="list-group-item list-group-item-action">Vue.js</a>
+                            <a href="https://daneden.github.io/animate.css/" target="_blank" class="list-group-item list-group-item-action">Animate.css</a>
+                            <a href="https://fontawesome.com/?from=io" target="_blank" class="list-group-item list-group-item-action">Font Awesome</a>
+                            <a href="https://getbootstrap.com/" target="_blank" class="list-group-item list-group-item-action">Bootstrap 4.3 (login page only)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="login-container slideInUp animated">
+        <div class="row">
+            <div class="col-sm-9 col-md-6 col-lg-5 mx-auto">
+                <div class="card card-signin bg-light">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Please login below to unlock this site</h5>
+                        <form asp-controller="Identity" asp-action="/Account/ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="provider-form">
+                            <hr class="my-2">
+                            <div class="row provider-row">
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <button type="submit" class="btn btn-danger btn-lg btn-block" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Using @provider.DisplayName</button>
+                                }
+                            </div>
+                            <hr class="my-2">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+}
+@section Styles {
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/login.css" />
+}

@@ -1,0 +1,52 @@
+.nav-menu {
+    background-color: black;
+    border-bottom: 2px solid var(--red);
+    box-shadow: 3px 3px 3px var(--box-shadow);
+    display: flex;
+    height: 2.5rem;
+    justify-content: space-evenly;
+    margin-bottom: 0.2rem;
+    width: 100%;
+}
+
+.nav-menu.slideInDown {
+    animation-duration: 0.7s;
+}
+
+.nav-menu .menu-item {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    overflow: hidden;
+    padding: 0.1rem;
+}
+
+.nav-menu .router-link-active {
+    background-color: var(--faint-white);
+    transition: background-color 0.2s ease-in;
+}
+
+.nav-menu .menu-item .item-title {
+    line-height: normal;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.nav-menu a .svg-inline--fa {
+    color: white;
+    height: 100%;
+    width: 100%;
+}
+
+.nav-menu a:hover .svg-inline--fa, .nav-menu .router-link-active .svg-inline--fa {
+    color: var(--red);
+    transition: color 0.15s ease-in;
+}
+
+a.menu-item {
+    color: var(--red);
+    text-decoration: none;
+}

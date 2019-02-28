@@ -1,0 +1,38 @@
+﻿@page
+
+@using Financial_Planning_MVC.Views.Home;
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+@model IndexModel
+
+<div id="app">
+    <nav-menu></nav-menu>
+    <transition name="custom-classes-transition" mode="out-in" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutRight">
+        <!-- Pass the username of the currently authenticated user to the active component's slot.-->
+        <router-view class="page-container">@UserManager.GetUserName(User)</router-view>
+    </transition>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/vuejs/modal.css" />
+    <link rel="stylesheet" href="~/css/vuejs/navmenu.css" />
+    <link rel="stylesheet" href="~/css/vuejs/home.css" />
+    <link rel="stylesheet" href="~/css/vuejs/goals.css" />
+    <link rel="stylesheet" href="~/css/vuejs/common.css" />
+}
+
+<!--For a real production application, use the vue-loader to load .vue component files which will prevent having to load separate js files and css stylesheets for each component.-->
+@section Scripts {
+    <script src="~/lib/vue/vue.min.js"></script>
+    <script src="~/lib/vue/vue-router.min.js"></script>
+    <script src="~/lib/fontawesome/fontawesome.min.js"></script>
+    <script src="~/js/vuejs/modal.js"></script>
+    <script src="~/js/vuejs/navmenu.js"></script>
+    <script src="~/js/vuejs/home.js"></script>
+    <script src="~/js/vuejs/goals.js"></script>
+    <script src="~/js/vuejs/common.js"></script>
+}

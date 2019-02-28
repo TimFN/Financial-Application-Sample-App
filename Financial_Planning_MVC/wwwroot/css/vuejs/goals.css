@@ -1,0 +1,156 @@
+/* When developing a production application, use Vue files to scope CSS to components to avoid having to make complex selectors. */
+.page-container.Goals {
+    justify-content: flex-start;
+}
+
+.Goals.page-container .utility-button-container {
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem 1rem 0;
+    position: absolute;
+    right: 0;
+}
+
+.Goals.page-container .goals-page-header {
+    background-color: #ededed;
+    box-shadow: inset 0 0 5px 1px var(--box-shadow);
+    width: 100%;
+}
+
+.Goals.page-container .goals-container {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    margin: 0rem 1rem 0 1rem;
+    overflow: scroll;
+    /* Fixes an issue where the margins of the goals-container escapes the window. 
+    TODO: Figure out the cause of this.*/
+    width: 97%;
+}
+
+.Goals.page-container .goals-container .no-goals-container {
+    align-items: center;
+    background-color: var(--faint-white);
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 3px var(--box-shadow);
+    display: flex;
+    font-size: 1.5rem;
+    justify-content: center;
+    margin: 1rem;
+    padding: 1rem;
+    position: absolute;
+    text-align: center;
+}
+
+.Goals.page-container .goals-container .no-goals-container.animated.slideOutLeft {
+    animation-name: slideOutLeft;
+    animation-duration: 0.5s;
+}
+
+.Goals.page-container .goals-container .no-goals-container.animated.slideInLeft {
+    animation-name: slideInLeft;
+    animation-duration: 1s;
+}
+
+.Goals.page-container .goals-page-header-text {
+    margin: 0.5rem 0 0.5rem 0;
+    text-align: center;
+}
+
+.Goals.page-container .goals-container::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.Goals.page-container .goals-container .Goal {
+    background-color: var(--faint-white);
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 3px var(--box-shadow);
+    font-weight: bold;
+    margin: 0.5rem;
+    max-width: 50rem;
+    text-align: center;
+    width: 100%;
+}
+
+.Goals.page-container .goals-container .Goal .header {
+    padding: 0.5rem 0.5rem 0 0.5rem;
+}
+
+.Goals.page-container .goals-container .Goal .header .goal-name {
+    font-size: 1.5rem;
+    text-align: center;
+    width: 100%;
+    word-break: break-word;
+}
+
+.Goals.page-container .goals-container .Goal .body {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 0.5rem 0 0.5rem;
+}
+
+.Goals.page-container .goals-container .Goal .body .goal-description {
+    background-color: var(--light-gray);
+    border-radius: 0.25rem;
+    box-shadow: 2px 2px 2px var(--box-shadow);
+    margin: 0.5rem 0 0.5rem 0;
+    min-height: 4rem;
+    width: 100%;
+}
+
+.Goals.page-container .goals-container .Goal .body textarea.goal-description {
+    text-align: center;
+    resize: none;
+}
+
+.Goals.page-container .goals-container .Goal .body div.goal-description p {
+    margin: 0.5rem;
+    white-space: pre-line;
+}
+
+.Goals.page-container .goals-container .Goal .body .label {
+    font-size: 1.25rem;
+    height: 1.25rem;
+    margin: 0.5rem 0 0.5rem 0;
+    text-align: center;
+    width: 100%;
+}
+
+.Goals.page-container .goals-container .Goal .footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+}
+
+.Goals.page-container .goals-container .Goal .footer button {
+    background-color: black;
+    border: 1px var(--faint-white) solid;
+    border-radius: 0.35rem;
+    box-shadow: 2px 2px 2px var(--box-shadow);
+    color: white;
+    height: 2rem;   
+    outline: none;
+    width: 7rem;
+}
+
+.Goals.page-container .goals-container .Goal .footer button:hover {
+    cursor:pointer;
+}
+
+.Goals.page-container .goals-container .Goal .footer .footer-button:hover {
+    color: var(--red); 
+    transition: color 0.15s ease-in;
+}
+
+.Goals.page-container .goals-container .Goal .footer .footer-button.save {
+    margin: auto;
+}
+
+.Goals.page-container .goals-container .Goal .footer .footer-button.save:hover {
+    color: green;
+    transition: color 0.15s ease-in;
+}
