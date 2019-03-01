@@ -11,78 +11,80 @@
             <div v-show='!loading' class='goals-page-header'>
                 <h2 class='goals-page-header-text'>Personal Financial Goals</h2>
             </div>
-            <div v-show='!loading' v-bind:style="{'flex-direction': layout, 'flex-wrap': wrap, 'justify-content': justifyContent}" class='goals-container'>
-                <transition name='custom-classes-transition' mode='out-in' enter-active-class='animated slideInLeft' leave-active-class='animated slideOutLeft'>
-                    <div class='no-goals-container' v-show='noGoals && !loading'>
-                        <p>
-                            You have no active financial goals!
-                            <br>
-                            Create a new financial goal by clicking the plus icon located at the bottom right.
-                        </p>
-                    </div>
-                </transition>
-                <Goal v-for='(goal, index) in goals'
-                    v-bind:index='index'
-                    v-bind:key='goal'
-                    v-bind:goal='goal'
-                    @deleteGoal='deleteGoal'>
-                </Goal>
-            </div>
-            <div class='utility-button-container'>
-                <button v-show='!loading' v-on:click='changeLayout()' class='utility-button change-layout-button'>
-                    <i class="fas fa-th"></i>
-                </button>
-                <button v-show='!loading' v-on:click='addGoal()' class='utility-button round'>
-                    <i class='fas fa-plus-circle'></i>
-                </button>
+            <div class='goals-page-body'>
+                <div v-show='!loading' v-bind:style="{'flex-direction': layout, 'flex-wrap': wrap, 'justify-content': justifyContent}" class='goals-container'>
+                    <transition name='custom-classes-transition' mode='out-in' enter-active-class='animated slideInLeft' leave-active-class='animated slideOutLeft'>
+                        <div class='no-goals-container' v-show='noGoals && !loading'>
+                            <p>
+                                You have no active financial goals!
+                                <br>
+                                Create a new financial goal by clicking the plus icon located at the bottom right.
+                            </p>
+                        </div>
+                    </transition>
+                    <Goal v-for='(goal, index) in goals'
+                        v-bind:index='index'
+                        v-bind:key='goal'
+                        v-bind:goal='goal'
+                        @deleteGoal='deleteGoal'>
+                    </Goal>
+                </div>
+                <div class='utility-button-container'>
+                    <button v-show='!loading' v-on:click='changeLayout()' class='utility-button change-layout-button'>
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button v-show='!loading' v-on:click='addGoal()' class='utility-button round'>
+                        <i class='fas fa-plus-circle'></i>
+                    </button>
+                </div>
             </div>
         </div>
     `;
 
     const goalTemplate = `
-    <transition name='custom-classes-transition' mode='out-in' enter-active-class='animated slideInRight' leave-active-class='animated slideOutRight'>
-        <div class='Goal'>
-            <div class='header'>
-                <div v-if='!editing' class='goal-name'>
-                    {{goal.name}}
+        <transition name='custom-classes-transition' mode='out-in' enter-active-class='animated slideInRight' leave-active-class='animated slideOutRight'>
+            <div class='Goal'>
+                <div class='header'>
+                    <div v-if='!editing' class='goal-name' data-placeholder='Enter your financial goal name'>
+                        {{goal.name}}
+                    </div>
+                    <input v-else v-model='goal.name' type='text' class='goal-name' data-placeholder='Goal description'>
                 </div>
-                <input v-else v-model='goal.name' type='text' placeholder='Enter your financial goal name' class='goal-name'>
+                <hr>
+                <div class='body'>
+                    <div class='label'>
+                        Goal Description:
+                    </div>
+                    <div v-if='!editing' class='goal-description'>
+                        <p>{{goal.description}}</p>
+                    </div>
+                    <textarea v-else v-model='goal.description' placeholder='Enter your financial goal description' class='goal-description'>Goal</textarea>
+                    <div class='label'>
+                        Target Amount:
+                    </div>
+                    <div v-if='!editing'>
+                        \${{goal.targetAmount}}
+                    </div>
+                    <input v-else v-model='goal.targetAmount' type='number' step='0.01'>
+                    <div class='label'>
+                        Amount Saved:
+                    </div>
+                    <div v-if='!editing'>
+                        \${{goal.amountSaved}}
+                    </div>
+                    <input v-else v-model='goal.amountSaved' type='number' step='0.01'>
+                    <div class='progress-bar'>
+                        <span v-bind:style="{width: percentage + '%'}"></span>
+                    </div>
+                </div>
+                <hr>
+                <div class='footer'>
+                    <button v-if='!editing' v-on:click='deleting = true; deleteSelf()' v-bind:disabled="deleting" class='footer-button'>Delete Goal</button>
+                    <button v-if='!editing' v-on:click='editing = !editing' class='footer-button'>Edit Goal</button>
+                    <button v-if='editing' v-on:click='saving = true; saveGoal()' v-bind:disabled='saving === true' class='footer-button save'>Save Goal</button>
+                </div>
             </div>
-            <hr>
-            <div class='body'>
-                <div class='label'>
-                    Goal Description:
-                </div>
-                <div v-if='!editing' class='goal-description'>
-                    <p>{{goal.description}}</p>
-                </div>
-                <textarea v-else v-model='goal.description' placeholder='Enter your financial goal description' class='goal-description'></textarea>
-                <div class='label'>
-                    Target Amount:
-                </div>
-                <div v-if='!editing' class='label'>
-                    \${{goal.targetAmount}}
-                </div>
-                <input v-else v-model='goal.targetAmount' type='number' step='0.01' class='label'>
-                <div class='label'>
-                    Amount Saved:
-                </div>
-                <div v-if='!editing' class='label'>
-                    \${{goal.amountSaved}}
-                </div>
-                <input v-else v-model='goal.amountSaved' type='number' step='0.01' class='label'>
-                <div class='progress-bar'>
-                    <span v-bind:style="{width: percentage + '%'}"></span>
-                </div>
-            </div>
-            <hr>
-            <div class='footer'>
-                <button v-if='!editing' v-on:click='deleteSelf()' class='footer-button'>Delete Goal</button>
-                <button v-if='!editing' v-on:click='editing = !editing' class='footer-button'>Edit Goal</button>
-                <button v-if='editing' v-on:click='saveGoal()' class='footer-button save'>Save Goal</button>
-            </div>
-        </div>
-    </transition>
+        </transition>
     `;
 
     Vue.component('Goals', {
@@ -124,14 +126,14 @@
                         response.json()
                             .then(goals => {
                                 this.loading = false;
-                                this.goals = goals;
+                                this.goals   = goals;
                             });
                     }
                 });
             },
             addGoal: function () {
                 const goal = {
-                    name: 'Goal Name',
+                    name: '',
                     targetAmount: 0,
                     amountSaved: 0,
                     description: '',
@@ -144,23 +146,35 @@
                 })
                 .then(response => {
                     if (response.ok === false) {
-                        alert(`Error: ${response.status}`);
+                        // There was an error creating the goal, display the error.
+                        response.text()
+                            .then(function(error) {
+                                alert(`Error: ${error}`);
+                            });
                     }
                     else {
                         response.json()
                             .then(goal => {
+                                goal.new = true;
+
                                 this.goals.push(goal);
                             });
                     }
                 });
             },
             deleteGoal: function (goalComponent) {
+                this.deleting = true;
+
                 fetch(`/api/Goal/${goalComponent.goal.id}`, {
                     method: 'DELETE'
                 })
                 .then(response => {
                     if (response.ok === false) {
-                        alert(`Error: ${response.status}`);
+                        // There was an error deleting the goal, display the error.
+                        response.text()
+                            .then(function (error) {
+                                alert(`Error: ${error}`);
+                            });
                     }
                     else {
                         // Clicking the delete button on the child goal component causes the component to emit a 'deleteGoal' 
@@ -178,6 +192,8 @@
                 data: function () {
                     return {
                         editing: false,
+                        saving: false,
+                        deleting: false,
                         // Make a copy of the goal object representing the goal model.
                         // This is used to create a JSON patch document for a PATCH request.
                         cachedGoal: Object.assign({}, this.goal),
@@ -200,10 +216,21 @@
                         // Scroll the container to the bottom to view the newly added goal.
                         container.scrollTop = container.scrollHeight;
                     }
+
+                    if (this.goal.new === true) {
+                        // A new goal is being created, enable edit mode.
+                        this.editing = true;
+                    }
                 },
                 methods: {
                     saveGoal: function () {
                         const patch = [];
+
+                        // Disable the save button on this component.
+                        this.saving = true;
+
+                        // Goal is no longer new. Prevents edit mode from being enabled by default.
+                        delete this.goal.new;
 
                         // Loop over all properties of the goal object and compare the values of each
                         // property to the values of the cached goal we originally received from the server.
@@ -228,8 +255,14 @@
                             })
                             .then(response => {
                                 if (response.ok === false) {
-                                    alert(`Error: ${response.status}`);
-                                    this.editing = false;
+                                    // There was an error updating the goal, display the error.
+                                    response.text()
+                                        .then(function (error) {
+                                            alert(`Error: ${error}`);
+
+                                            this.editing = false;
+                                            this.saving  = false;
+                                        });
                                 }
                                 else {
                                     response.json()
@@ -237,13 +270,16 @@
                                             // Update the cached goal for the next save operation if it happens.
                                             this.cachedGoal = Object.assign({}, goal);
                                             this.editing    = false;
+                                            this.saving     = false;
                                         });
                                 }
                             });
                         }
                         else {
                             this.editing = false;
+                            this.saving  = false;
                         }
+
                     },
                     deleteSelf: function () {
                         // Emit an event to the parent Goal component to let it know that we want to delete this goal.
