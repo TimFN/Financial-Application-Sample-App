@@ -13,7 +13,7 @@
                 <p>Animations are provided by the Animate.css animation libary and are handled by Vuejs. All icons are provided by the Font Awesome icon library. The components, styling, and layout are custom-made with the exception of the transition animations.</p>
                 <p>The server-side routing of the login and index views is done in .NET Core MVC. A .NET Core RESTful API is used to allow securely retrieving, updating, and inserting financial goals.</p>
                 <p>In order to interact with this API, the requesting user must be authenticated. The API will not allow a user to retrieve or modify data that does not belong to them.</p>
-                <span style='align-self: flex-start'>-Timon Feldmann</span>
+                <span style='align-self: flex-start; width: 100%'>-Timon Feldmann</span>
             </Modal>
         </div>
     `;

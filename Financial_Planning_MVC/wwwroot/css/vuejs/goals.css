@@ -43,7 +43,8 @@
     display: flex;
     font-size: 1.5rem;
     justify-content: center;
-    margin: 1rem;
+    margin: 1rem 1rem 1rem 0;
+    margin-left: auto;
     padding: 1rem;
     position: absolute;
     text-align: center;
