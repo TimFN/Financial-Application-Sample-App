@@ -45,20 +45,20 @@
         <transition name='custom-classes-transition' mode='out-in' enter-active-class='animated slideInRight' leave-active-class='animated slideOutRight'>
             <div class='Goal'>
                 <div class='header'>
-                    <div v-if='!editing' class='goal-name' data-placeholder='Enter your financial goal name'>
+                    <div v-if='!editing' class='goal-name'>
                         {{goal.name}}
                     </div>
-                    <input v-else v-model='goal.name' type='text' class='goal-name' data-placeholder='Goal description'>
+                    <input v-else v-model='goal.name' type='text' class='goal-name' placeholder='Enter your goal name'>
                 </div>
                 <hr>
                 <div class='body'>
                     <div class='label'>
-                        Goal Description:
+                        Description:
                     </div>
                     <div v-if='!editing' class='goal-description'>
                         <p>{{goal.description}}</p>
                     </div>
-                    <textarea v-else v-model='goal.description' placeholder='Enter your financial goal description' class='goal-description'>Goal</textarea>
+                    <textarea v-else v-model='goal.description' placeholder='Enter your goal description' class='goal-description'>Goal</textarea>
                     <div class='label'>
                         Target Amount:
                     </div>
@@ -120,6 +120,7 @@
                 .then(response => {
                     if (response.ok === false) {
                         alert(`Error: ${response.status}`);
+
                         this.loading = false;
                     }
                     else {
@@ -148,7 +149,7 @@
                     if (response.ok === false) {
                         // There was an error creating the goal, display the error.
                         response.text()
-                            .then(function(error) {
+                            .then(error => {
                                 alert(`Error: ${error}`);
                             });
                     }
@@ -172,7 +173,7 @@
                     if (response.ok === false) {
                         // There was an error deleting the goal, display the error.
                         response.text()
-                            .then(function (error) {
+                            .then(error => {
                                 alert(`Error: ${error}`);
                             });
                     }
@@ -257,7 +258,7 @@
                                 if (response.ok === false) {
                                     // There was an error updating the goal, display the error.
                                     response.text()
-                                        .then(function (error) {
+                                        .then(error => {
                                             alert(`Error: ${error}`);
 
                                             this.editing = false;

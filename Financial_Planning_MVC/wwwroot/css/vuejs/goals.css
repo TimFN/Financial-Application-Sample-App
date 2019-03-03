@@ -100,10 +100,6 @@
     word-break: break-word;
 }
 
-.Goals.page-container .goals-container .Goal .header .goal-name:empty:before {
-    content: attr(data-placeholder);
-}
-
 .Goals.page-container .goals-container .Goal .body {
     align-items: center;
     display: flex;
@@ -116,6 +112,7 @@
     background-color: var(--light-gray);
     border-radius: 0.25rem;
     box-shadow: 2px 2px 2px var(--box-shadow);
+    font-size: 1rem;
     margin: 0.5rem 0 0.5rem 0;
     min-height: 4rem;
     width: 100%;
