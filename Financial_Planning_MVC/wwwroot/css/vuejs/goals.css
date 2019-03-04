@@ -22,16 +22,20 @@
 .Goals.page-container .goals-page-body {
     display: flex;
     flex-direction: row;
-    height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none;
     width: 100%;
+}
+
+.Goals.page-container .goals-page-body::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }
 
 .Goals.page-container .goals-container {
     align-items: center;
     display: flex;
-    flex: 1;
     margin: 0rem 1rem 0 1rem;
-    overflow: scroll;
     width: 100%;
 }
 
@@ -63,11 +67,6 @@
 .Goals.page-container .goals-page-header-text {
     margin: 0.5rem 0 0.5rem 0;
     text-align: center;
-}
-
-.Goals.page-container .goals-container::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
 }
 
 .Goals.page-container .goals-container .Goal {
@@ -120,7 +119,7 @@
 
 .Goals.page-container .goals-container .Goal .body textarea.goal-description {
     text-align: center;
-    resize: none;
+    resize: vertical;
 }
 
 .Goals.page-container .goals-container .Goal .body div.goal-description p {

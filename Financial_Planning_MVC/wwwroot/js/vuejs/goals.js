@@ -211,7 +211,7 @@
                 },
                 template: goalTemplate,
                 mounted: function () {
-                    const container = this.$el.parentElement;
+                    const container = this.$el.closest('.goals-page-body');
 
                     if (container) {
                         // Scroll the container to the bottom to view the newly added goal.
